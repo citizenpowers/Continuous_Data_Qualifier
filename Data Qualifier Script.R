@@ -4,13 +4,15 @@ library(readxl)
 library(dplyr)
 library(data.table)
 library(ggplot2)
-library(xlsx) 
 library(tidyr)
 library(stringr)
-library(rebus)
 library(lubridate)
 library(scales)
 library(readr)
+library(data.table)
+library(stringr)
+library(lubridate)
+library(tidyverse)
 
 
 # Calibration Ranges --------------------------------------------------
@@ -99,18 +101,18 @@ BGA_RFU_16 <-c(14.4,17.6)
 
 # Import Deployment Data -------------------------------------------------------------
 #Deployment 1
-Bare_Sonde <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Bare_ECOTOPE_060921.csv") %>% mutate (Event="Event 1") #deployment 1
-Chara_Sonde <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Chara_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
-Cattail_Sonde <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Cattail_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
-Southern_N_Sonde <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Southern_N_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
-Mixed_Sonde <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Mixed_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
+Bare_60921 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Bare_ECOTOPE_060921.csv") %>% mutate (Event="Event 1") #deployment 1
+Chara_60921 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Chara_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
+Typha_60921 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Cattail_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
+Southern_N_60921 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Southern_N_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
+Mixed_60921 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Mixed_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
 
 #Deployment 2
-Bare_Sonde_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/pdynSTA34A41_ecotopeBare - 082621 174830.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
-Cattail_Sonde_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Cattail - 083121 133214.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
-Chara_Sonde_082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Chara - 083121 133903.csv") %>% mutate (Event="Event 2") #file contains data from PDYNAMICS site and ECOTOPE site
-Mixed_Sonde_082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Mixed- 083121 134557.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
-Naiad_Sonde_082621<- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Southern Naiad- 083121 135134.csv") %>% mutate (Event="Event 2") #file contains data from PDYNAMICS site and ECOTOPE site
+Bare_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/pdynSTA34A41_ecotopeBare - 082621 174830.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
+Cattail_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Cattail - 083121 133214.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
+Chara_082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Chara - 083121 133903.csv") %>% mutate (Event="Event 2") #file contains data from PDYNAMICS site and ECOTOPE site
+Mixed__082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Mixed- 083121 134557.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
+Naiad_082621<- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Southern Naiad- 083121 135134.csv") %>% mutate (Event="Event 2") #file contains data from PDYNAMICS site and ECOTOPE site
 
 #Deployment 3
 Bare_091521 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/20210915_bare.csv") %>% mutate (Event="Event 3")
@@ -163,6 +165,47 @@ Post_Cal_20211110 <- read_excel("C:/Users/citiz/OneDrive - South Florida Water M
 Post_Cal_20220503 <- read_excel("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Calibrations/20220503 Post-Cal.xlsx") %>% mutate (Event="Event 5")
 Post_Cal_20230524 <- read_excel("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Calibrations/20230524 Post-Cal.xlsx") %>% mutate (Event="Event 6")
 Post_Cal_20230606 <- read_excel("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Calibrations/20230606 Post-Cal.xlsx") %>% mutate (Event="Event 7")
+Post_Cal_20230823 <- read_excel("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Calibrations/20230823 Post-Cal.xlsx") %>% mutate (Event="Event 8")
+
+
+# Tidy Deployment Data ----------------------------------------------------
+
+#join Data sets 
+Deployment_Data <- bind_rows(Clean_Column_Headers(Bare_60921),Clean_Column_Headers(Southern_N_60921), Clean_Column_Headers(Typha_60921), Clean_Column_Headers(Mixed_60921), Clean_Column_Headers(Chara_60921)) %>% #Bind Event 1 Data
+bind_rows(Clean_Column_Headers(Bare_082621)) %>% # ,Clean_Column_Headers(Southern_N_082621), Clean_Column_Headers(Typha_082621), Clean_Column_Headers(Mixed_082621), Clean_Column_Headers(Chara_082621)) #%>% #Bind Event 2 Data
+mutate(Date=mdy(Date),`Date Time`=ymd_hms(paste(Date," ",Time)))  # Format date and time
+  
+  
+
+# Function clean column headers -------------------------------------------
+
+Clean_Column_Headers <-  function(df)
+{
+  ifelse(TRUE %in% str_detect(names(df),"DO mg/L"),setnames(df, old=grep("DO mg/L", names(df), value = TRUE),new="DO (mg/L)"),ifelse(TRUE %in% str_detect(names(df),"DO \\(mg/L\\)"),NA,df<-add_column(df,`DO (mg/L)` = NA))) 
+  ifelse(TRUE %in% str_detect(names(df),"\u00B0"),setnames(df,old=grep("\u00B0", names(df), value = TRUE),new="Temp (C°)"),ifelse(TRUE %in% str_detect(names(df),"Temp \\(C°\\)"),NA,df<-add_column(df,`Temp (C°)` = NA)))       #Degree symbol is specified using unicode designation
+  ifelse(TRUE %in% str_detect(names(df),"SPC-uS/cm"),setnames(df,old=grep("SPC-uS/cm", names(df), value = TRUE),new="SpCond (µS/cm)"),ifelse(TRUE %in% str_detect(names(df),"SpCond \\(µS/cm\\)"),NA,df<-add_column(df,`SpCond (µS/cm)` = NA)))    
+  ifelse(TRUE %in% str_detect(names(df),"pH-"),setnames(df,old=grep("pH-", names(df), value = TRUE),new="pH"),ifelse(TRUE %in% str_detect(names(df),"pH"),NA,df<-add_column(df,`pH` = NA)))
+  ifelse(TRUE %in% str_detect(names(df),"FNU"),setnames(df,old=grep("FNU", names(df), value = TRUE),new="Turbidity (FNU)"),ifelse(TRUE %in% str_detect(names(df),"Turbidity \\(FNU\\)"),NA,df<-add_column(df,`Turbidity (FNU)` = NA)))   
+  ifelse(TRUE %in% str_detect(names(df),"fDOM RFU"), setnames(df,old=grep("fDOM RFU", names(df), value = TRUE),new="fDOM (RFU)"),ifelse(TRUE %in% str_detect(names(df),"fDOM \\(RFU\\)"),NA,df<-add_column(df,`fDOM (RFU)` = NA)))    
+  ifelse(TRUE %in% str_detect(names(df),"Chl RFU"),setnames(df,old=grep("Chl RFU", names(df), value = TRUE),new="TAL (RFU)"),ifelse(TRUE %in% str_detect(names(df),"TAL \\(RFU\\)"),NA,df<-add_column(df,`TAL (RFU)` = NA)))  
+  
+  
+  select(df,Event,Site,`Unit ID`,Date,Time,`DO (mg/L)`,`Temp (C°)`,`SpCond (µS/cm)`,pH,`Turbidity (FNU)`,`fDOM (RFU)`,`TAL (RFU)`)
+}
+
+str(Clean_Column_Headers(Bare_082621))
+str(Deployment_Data)
+
+if_else(str_detect(names(Bare_082621),"fDOM RFU"),1,0)
+names(Bare_60921)
+
+ifelse(TRUE %in% str_detect(names(Bare_60921),"fDOM RFU"), setnames(Bare_60921,old=grep("fDOM RFU", names(Bare_60921), value = TRUE),new="fDOM (RFU)"), test<-add_column(Bare_60921,`fDOM (RFU)` = "No Data"))    
+
+str(Bare_082621)
+str(Bare_60921)
+test <- add_column(Bare_082621,add_column ="constant_value")
+ifelse(TRUE %in% str_detect(names(Bare_082621),"DO \\(mg/L\\)"),NA,test<-add_column(Bare_082621,`DO (mg/L)` = "No Data"))
+
 
 #Import Post-Calibration data and for each parameter check if value is within post-Calibration range for top and bottom standards. If value is within both top and bottom bracket a "pass" is assigned in calibration column  
 Calibrations <- read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/Event_Calibrations2.xlsx") %>%
@@ -204,7 +247,7 @@ Event_7 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC
 Event_8 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2017 November to December PFLUX Event 8.xlsx"),Event=8)
 Event_9 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2018 June to Spetember PFLUX Event 9.xlsx"),Event=9)
 
-#Function to Select relevent parameters
+#Function to Select relevant parameters
 Parameter_select <-  function(df)
 {
   df1 <- select(df,import_parameters)
