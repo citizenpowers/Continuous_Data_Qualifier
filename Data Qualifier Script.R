@@ -21,49 +21,10 @@ library(tidyverse)
 Temp_Range <-c(-5,50)
 Cond_Range <-c(0,200000)
 SpCond_Range <-c(0,200000)
-Sal_Range <-c(0,70)
-TDS_Range <-c(0,100000)
-ODO_percent_Range <-c(0,500) 
 ODO_mg_Range <-c(0,50) 
 pH_Range <-c(0,14)
 Turbidity_Range <-c(0,4000)
-Turbidity_Range_NTU <-c(0,4000)
-TSS_Range<-c(0,1500)
 fDOM_RFU_Range <-c(0,100)
-fDOM_QSU_Range <-c(0,300)
-Chlorophyll_RFU_Range <-c(0,60)
-Chlorophyll_ugl_Range <-c(0,400)
-BGA_PC_RFU_Range <-c(0,100)
-BGA_PC_ug_L_Range <-c(0,100)
-import_parameters <-c("Site Name","Date (MM/DD/YYYY)","Time (HH:MM:SS)","Temp ?C","Cond ?S/cm","SpCond ?S/cm","Sal psu","TDS mg/L",
-                      "ODO % sat","ODO mg/L","pH","Turbidity NTU","Turbidity FNU","TSS mg/L","fDOM QSU","Chlorophyll ?g/L","Chlorophyll RFU","BGA-PC ?g/L","BGA-PC RFU","Event")
-
-#Pre-calibration ranges for bracketing
-pre_SpCond_2000 <-c(1980,2020)
-pre_Cond_2000 <- c(1980,2020)
-pre_SpCond_200 <-c(198,202)
-pre_do <- c(99, 101)
-pre_pH_4 <-c(3.9,4.1)
-pre_pH_7 <-c(6.9,7.1)
-pre_pH_10 <-c(9.9,10.1)
-pre_Turbidity_0 <-c(0,1.24)
-pre_Turbidity_124<-c(122.8,125.2)
-pre_TSS_0<-c(0,2)
-pre_TSS_1500<-c(1350,1650)
-pre_TDS_0 <-c(0,2)
-pre_TDS_100000<-c(0,100000)
-pre_FDOM_QSU_0 <-c(0,3)
-pre_fDOM_QSU_300 <-c(297,303)
-pre_FDOM_RFU_0 <-c(0,1)
-pre_fDOM_RFU_100 <-c(99,101)
-pre_Chlorophyll_ug_L_0 <-c(0,0.6)
-pre_Chlorophyll_ug_L_66 <-c(65.34,66.66)
-pre_Chlorophyll_RFU_0 <-c(0,0.16)
-pre_Chlorophyll_RFU_16.4 <-c(16.24,16.56)
-pre_BGA_ug_L_0 <-c(0,0.16)
-pre_BGA_ug_L_16 <-c(15.84,16.16)
-pre_BGA_RFU_0 <-c(0,0.16)
-pre_BGA_RFU_16 <-c(15.84,16.16)
 
 #Calibration ranges for bracketing
 SpCond_2000 <-c(1900,2100)
@@ -71,32 +32,9 @@ SpCond_200 <-c(190,210)
 pH_4 <-c(3.7,4.3)
 pH_7 <-c(6.7,7.3)
 pH_10 <-c(9.7,10.3)
-Turbidity_0 <-c(0,2)
 Turbidity_124<-c(111.6,136.4)
-TSS_0<-c(0,2)
-TSS_1500<-c(1350,1650)
-TDS_0 <-c(0,2)
-TDS_100000<-c(0,100000)
-FDOM_QSU_0 <-c(0,2)
-fDOM_QSU_300 <-c(270,330)
 FDOM_RFU_0 <-c(0,2)
 fDOM_RFU_100 <-c(90,110)
-Chlorophyll_ug_L_0 <-c(0,2)
-Chlorophyll_ug_L_66 <-c(59.4,72.6)
-Chlorophyll_RFU_0 <-c(0,2)
-Chlorophyll_RFU_16.4 <-c(14.76,18.04)
-BGA_ug_L_0 <-c(0,2)
-BGA_ug_L_16 <-c(14.4,17.6)
-BGA_RFU_0 <-c(0,2)
-BGA_RFU_16 <-c(14.4,17.6)
-
-#Stations in Cells
-`Cell 3`<- c("ST2C3C20","ST2C3C56","ST2C3C92","ST2C3C128","ST2C3C164","ST2C3C200","ST2C3Inflow")
-`Cell 1`<- c("ST2C1A3","ST2C1B2","ST2C1F3","ST2C1G3","ST2C1H2","ST2C1Out","ST2C1C3","ST2C1H3","ST2C1OUT")
-`Cell 3B`<- c("ST34C3BB7","ST34C3BD7")
-`Cell 3A`<- c("ST34C3AA56","ST34C3AA20")
-
-
 
 
 # Import Deployment Data -------------------------------------------------------------
@@ -108,12 +46,20 @@ Southern_N_60921 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Mana
 Mixed_60921 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/EXOdata_Mixed_ECOTOPE_060921.csv") %>% mutate (Event="Event 1")  #deployment 1
 
 #Deployment 2
-Bare_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/pdynSTA34A41_ecotopeBare - 082621 174830.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
-Cattail_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Cattail - 083121 133214.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
-Chara_082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Chara - 083121 133903.csv") %>% mutate (Event="Event 2") #file contains data from PDYNAMICS site and ECOTOPE site
-Mixed__082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Mixed- 083121 134557.csv") %>% mutate (Event="Event 2")  #file contains data from PDYNAMICS site and ECOTOPE site
-Naiad_082621<- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Southern Naiad- 083121 135134.csv") %>% mutate (Event="Event 2") #file contains data from PDYNAMICS site and ECOTOPE site
+Bare_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/pdynSTA34A41_ecotopeBare - 082621 174830.csv") %>% mutate (Event="Event 2") %>%
+slice(1993:2325) %>%  mutate(Site="STA3/4C2B_Ecotope_Bare")             #sonde was switched from PDYNAMICS site to ECOTOPE site at  row 1991 and collected at 2325
 
+Cattail_082621 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Cattail - 083121 133214.csv") %>% mutate (Event="Event 2")  %>% mutate(`Site`="Typha") %>% slice(3875:4847)#file contains data from PDYNAMICS site and ECOTOPE site
+
+Chara_082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Chara - 083121 133903.csv") %>% mutate (Event="Event 2") %>% slice(1994:2328) %>% #sonde was switched from PDYNAMICS site to ECOTOPE site at  row 1994 and collected at 2328
+mutate(Site="STA3/4C2B_Ecotope_Chara") #file contains data from PDYNAMICS site and ECOTOPE site
+
+Mixed_082621 <-  read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Mixed- 083121 134557.csv") %>% mutate (Event="Event 2") %>% #file contains data from PDYNAMICS site and ECOTOPE site
+slice(1995:2326) %>%  mutate(Site="STA3/4C2B_Ecotope_Mixed") #sonde was switched from PDYNAMICS site to ECOTOPE site at  row 1995 and collected at 2326
+
+Naiad_082621<- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Southern Naiad- 083121 135134.csv") %>% mutate (Event="Event 2") %>% #file contains data from PDYNAMICS site and ECOTOPE site
+slice(1992:2325) %>%  mutate(Site="STA3/4C2B_Ecotope_Naiad") #sonde was switched from PDYNAMICS site to ECOTOPE site at  row 1992 and collected at 1995
+ 
 #Deployment 3
 Bare_091521 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/20210915_bare.csv") %>% mutate (Event="Event 3")
 Mixed_091521 <- read_csv("C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/20210915_mixed.csv") %>% mutate (Event="Event 3")
@@ -172,10 +118,116 @@ Post_Cal_20230823 <- read_excel("C:/Users/citiz/OneDrive - South Florida Water M
 
 #join Data sets 
 Deployment_Data <- bind_rows(Clean_Column_Headers(Bare_60921),Clean_Column_Headers(Southern_N_60921), Clean_Column_Headers(Typha_60921), Clean_Column_Headers(Mixed_60921), Clean_Column_Headers(Chara_60921)) %>% #Bind Event 1 Data
-bind_rows(Clean_Column_Headers(Bare_082621)) %>% # ,Clean_Column_Headers(Southern_N_082621), Clean_Column_Headers(Typha_082621), Clean_Column_Headers(Mixed_082621), Clean_Column_Headers(Chara_082621)) #%>% #Bind Event 2 Data
-mutate(Date=mdy(Date),`Date Time`=ymd_hms(paste(Date," ",Time)))  # Format date and time
+bind_rows(Clean_Column_Headers(Bare_082621), Clean_Column_Headers(Naiad_082621), Clean_Column_Headers(Cattail_082621), Clean_Column_Headers(Mixed_082621), Clean_Column_Headers(Chara_082621)) %>% #Bind Event 2 Data
+bind_rows(Clean_Column_Headers(Bare_091521), Clean_Column_Headers(Naiad_091521), Clean_Column_Headers(Typha_091521), Clean_Column_Headers(Mixed_091521), Clean_Column_Headers(Chara_091521)) %>% #Bind Event 3 Data
+bind_rows(Clean_Column_Headers(Bare_112421), Clean_Column_Headers(Naiad_112421), Clean_Column_Headers(Typha_112421), Clean_Column_Headers(Mixed_112421), Clean_Column_Headers(Chara_112421)) %>% #Bind Event 4 Data
+bind_rows(Clean_Column_Headers(Bare_20220502), Clean_Column_Headers(Naiad_20220502), Clean_Column_Headers(Typha_20220502), Clean_Column_Headers(Mixed_20220502), Clean_Column_Headers(chara_20220502)) %>% #Bind Event 5 Data
+bind_rows(Clean_Column_Headers(Bare_20220531), Clean_Column_Headers(Naiad_20220531), Clean_Column_Headers(Typha_20220531), Clean_Column_Headers(Mixed_20220531), Clean_Column_Headers(chara_20220531)) %>% #Bind Event 6 Data
+bind_rows(Clean_Column_Headers(Bare_20230524), Clean_Column_Headers(Typha_20230524), Clean_Column_Headers(Mixed_20230524), Clean_Column_Headers(chara_20230524)) %>% #Bind Event 7 Data
+bind_rows(Clean_Column_Headers(Bare_20230823), Clean_Column_Headers(Typha_20230823), Clean_Column_Headers(Mixed_20230823), Clean_Column_Headers(chara_20230823)) %>%    #Bind Event 8 Data
+mutate(Date=mdy(Date),`Date Time`=ymd_hms(paste(Date," ",Time))) %>%  # Format date and time
+mutate(STA=ifelse(str_detect(Site,"STA3"),"STA34",NA))    %>%         #get STA name from site  
+mutate(Ecotope=case_when(str_detect(Site,"Bare")~"Bare",
+                         str_detect(Site,"SouthernN")~"Southern Naiad",
+                         str_detect(Site,"Mixed")~"Chara and Southern Naiad",
+                         str_detect(Site,"Chara")~"Chara",
+                         str_detect(Site,"Cattail")~"Typha",
+                         .default = as.character("Missing site name"))) %>%
+mutate(Sonde=substr(`Unit ID`,str_locate(`Unit ID`,"-")[1]+1,nchar(`Unit ID`)))
+                         
+                     
+write.csv(Deployment_Data,"C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Ecotope_deployed_sonde_data_raw.csv",row.names=FALSE)  #Save combined data without any qualifiers
+
+# Tidy Post Cal Data ------------------------------------------------------
+
+#Checks to see if post-cal passed single calibration points
+Post_Cal_Data <- bind_rows(Post_Cal_20210630,Post_Cal_20210826,Post_Cal_20211110,Post_Cal_20220503,Post_Cal_20230524,Post_Cal_20230606,Post_Cal_20230823) %>%    
+pivot_longer(names_to="Parameter",values_to="Value",cols=c("SpCond 200", "SpCond 2000","DO", "pH 7", "pH 10", "FDOM RFU", "Turbidity","TAL RFU", "BGA RFU","pH 4")) %>% 
+mutate(Calibration=case_when(Parameter=="SpCond 2000" & Value %between% SpCond_2000 ~ "Passed SpCond 2000",
+                             Parameter=="SpCond 2000" & !Value %between% SpCond_2000 ~ "Failed SpCond 2000",
+                             Parameter=="SpCond 200" & Value %between% SpCond_200 ~ "Passed SpCond 200",
+                             Parameter=="SpCond 200" & !Value %between% SpCond_200 ~ "Failed SpCond 200",
+                             Parameter=="pH 7" & Value %between% pH_7 ~ "Passed pH 7",
+                             Parameter=="pH 7" & !Value %between% pH_7 ~ "Failed pH 7",
+                             Parameter=="pH 10" & Value %between% pH_10 ~ "Passed pH 7",
+                             Parameter=="pH 10" & !Value %between% pH_10 ~ "Failed pH 7",
+                             Parameter=="pH 4" & Value %between% pH_4 ~ "Passed pH 4",
+                             Parameter=="pH 4" & !Value %between% pH_4 ~ "Failed pH 4",
+                             Parameter=="Turbidity" & Value %between% Turbidity_124 ~ "Passed Turbidity 124",
+                             Parameter=="Turbidity" & !Value %between% Turbidity_124 ~ "Failed Turbidity 4",
+                             Parameter=="FDOM RFU" & Value %between% fDOM_RFU_100 ~ "Passed RFU 100",
+                             Parameter=="FDOM RFU" & !Value %between% fDOM_RFU_100 ~ "Failed RFU 100",
+                            .default = as.character("Missing Calibration Data"))) %>%
+mutate(Calibration=ifelse(is.finite(Value) & is.finite(`DO T-Val`) & Parameter=="DO",ifelse(abs(Value-`DO T-Val`)<=0.3,"Passed DO","Failed DO") ,Calibration))        #check if DO is within 0.3 mg/l to True value based on temp
+
+
+#checks to see if post-cal was passed for the multiple calibrations points needed to bracket the data
+Post_Cal_Summarized <- Post_Cal_Data %>%
+select(Event,Sonde,Parameter,Calibration) %>%  
+pivot_wider(names_from = "Parameter", values_from = "Calibration")  %>%
+mutate(`DO (mg/L)`=case_when(str_detect(DO,"Passed")~"DO Passed Post-Calibration",                            
+                             str_detect(DO,"Failed")~"DO Failed Post-Calibration",
+                             str_detect(DO,"Missing")~"DO Missing Post-Calibration Data",
+                             .default = as.character("DO Missing Post-Calibration Data"))) %>%
+mutate(`SpCond (µS/cm)`=case_when(str_detect(`SpCond 2000`,"Passed") &  str_detect(`SpCond 200`,"Passed") ~"SpCond Passed Post-Calibration",
+                               str_detect(`SpCond 2000`,"Failed") |  str_detect(`SpCond 200`,"Failed")~"SpCond Failed Post-Calibration",
+                               str_detect(`SpCond 2000`,"Missing") |  str_detect(`SpCond 200`,"Missing")~"SpCond Missing Post-Calibration Data",
+                               .default = as.character("SpCond Missing Post-Calibration Data"))) %>%
+mutate(`pH`=case_when(str_detect(`pH 7`,"Passed") &  str_detect(`pH 10`,"Passed") ~"pH Passed Post-Calibration",
+                               str_detect(`pH 7`,"Failed") |  str_detect(`pH 10`,"Failed")~"pH Failed Post-Calibration",
+                               str_detect(`pH 7`,"Missing") |  str_detect(`pH 10`,"Missing")~"pH Missing Post-Calibration Data",
+                               .default = as.character("SpCond Missing Post-Calibration Data"))) %>%
+mutate(`Turbidity (FNU)`=case_when(str_detect(Turbidity,"Passed")~"Turbidity Passed Post-Calibration",                              
+                               str_detect(Turbidity,"Failed")~"Turbidity Failed Post-Calibration",
+                               str_detect(Turbidity,"Missing")~"Turbidity Missing Post-Calibration Data",
+                               .default = as.character("Turbidity Missing Post-Calibration Data"))) %>%
+mutate(`fDOM (RFU)`=case_when(str_detect(`FDOM RFU`,"Passed")~"FDOM Passed Post-Calibration",                              
+                               str_detect(`FDOM RFU`,"Failed")~"FDOM Failed Post-Calibration",
+                               str_detect(`FDOM RFU`,"Missing")~"FDOM Missing Post-Calibration Data",
+                               .default = as.character("FDOM Missing Post-Calibration Data"))) %>%
+pivot_longer(names_to = "Parameter",values_to ="Post-Calibration",cols = c("DO (mg/L)", "SpCond (µS/cm)","pH","Turbidity (FNU)", "fDOM (RFU)"))  %>%
+select(Event,Sonde,Parameter,`Post-Calibration`)
+
+
+
+# --------- Joins deployed data to post-cal data ----------------------------------------------------------------
+
+
+Deployment_Data_Post_cal <- Deployment_Data %>%
+pivot_longer(names_to = "Parameter",values_to ="Value",cols = c("DO (mg/L)","Temp (C°)", "SpCond (µS/cm)","pH","Turbidity (FNU)", "fDOM (RFU)","TAL (RFU)") )  %>%
+left_join(Post_Cal_Summarized,by=c("Event","Sonde","Parameter"))
+
+
+
+
+# checks to see if deployed data is within manufacturers range ------------
+
+Deployment_Data_Post_cal_manufacurer_check <- Deployment_Data_Post_cal %>%
+mutate(`Manufacturer Range`=case_when(Parameter=="Temp (C°)" & Value %between% Temp_Range =="FALSE"~ "Value outside sensor range",
+                                      Parameter=="DO (mg/L)" & Value %between% ODO_mg_Range =="FALSE"~ "Value outside sensor range",  
+                                      Parameter=="SpCond (µS/cm)" & Value %between% SpCond_Range =="FALSE"~ "Value outside sensor range",
+                                      Parameter=="pH" & Value %between% pH_Range =="FALSE"~ "Value outside sensor range",
+                                      Parameter=="Turbidity (FNU)" & Value %between% Turbidity_Range =="FALSE"~ "Value outside sensor range",
+                                      Parameter=="fDOM (RFU)" & Value %between% fDOM_RFU_Range =="FALSE"~ "Value outside sensor range", 
+                                     .default = as.character(""))) 
+
+
+
+# Add qualifier code and remark notes with reason for qualification -------
+
+
+Deployment_Data_Qualified  <- Deployment_Data_Post_cal_manufacurer_check %>%
+mutate(`Remark Code`="",`Remark Note`="") %>%
+mutate(`Remark Code`=case_when(`Manufacturer Range`=="Value outside sensor range"~"?",
+                               str_detect(`Post-Calibration`,"Failed") | str_detect(`Post-Calibration`,"Missing") ~"J",
+                               `Parameter` %in% c("fDOM (RFU)","TAL (RFU)","Turbidity (FNU)") ~"H",
+                               .default = `Remark Code`)) %>%
+mutate(`Remark Note`=ifelse(`Remark Code` =="H","Method has not been recognized by the FDEP as equivalent to laboratory methods",`Remark Note`)) %>% 
+mutate(`Remark Note`=trimws(ifelse(`Remark Code` %in% c("H","J","?"),paste(`Remark Note`,`Manufacturer Range`,`Post-Calibration`),`Remark Note`))) 
   
-  
+                                
+write.csv(Deployment_Data_Qualified,"C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Ecotope_deployed_sonde_data_qualified.csv",row.names=FALSE)  #Save combined data with qualifiers
+
 
 # Function clean column headers -------------------------------------------
 
@@ -188,23 +240,24 @@ Clean_Column_Headers <-  function(df)
   ifelse(TRUE %in% str_detect(names(df),"FNU"),setnames(df,old=grep("FNU", names(df), value = TRUE),new="Turbidity (FNU)"),ifelse(TRUE %in% str_detect(names(df),"Turbidity \\(FNU\\)"),NA,df<-add_column(df,`Turbidity (FNU)` = NA)))   
   ifelse(TRUE %in% str_detect(names(df),"fDOM RFU"), setnames(df,old=grep("fDOM RFU", names(df), value = TRUE),new="fDOM (RFU)"),ifelse(TRUE %in% str_detect(names(df),"fDOM \\(RFU\\)"),NA,df<-add_column(df,`fDOM (RFU)` = NA)))    
   ifelse(TRUE %in% str_detect(names(df),"Chl RFU"),setnames(df,old=grep("Chl RFU", names(df), value = TRUE),new="TAL (RFU)"),ifelse(TRUE %in% str_detect(names(df),"TAL \\(RFU\\)"),NA,df<-add_column(df,`TAL (RFU)` = NA)))  
+  ifelse(TRUE %in% str_detect(names(df),"Site Name"),setnames(df,old=grep("Site Name", names(df), value = TRUE),new="Site"),ifelse(TRUE %in% str_detect(names(df),"Site"),NA,df<-add_column(df,`Site` = NA)))  
+  ifelse(TRUE %in% str_detect(names(df),"Unit"),setnames(df,old=grep("Unit", names(df), value = TRUE),new="Unit ID"),ifelse(TRUE %in% str_detect(names(df),"Unit ID"),NA,df<-add_column(df,`Unit ID` = NA)))  
+  ifelse(TRUE %in% str_detect(names(df),"Date \\(MM/DD/YYYY\\)"),setnames(df,old=grep("Date \\(MM/DD/YYYY\\)", names(df), value = TRUE),new="Date"),ifelse(TRUE %in% str_detect(names(df),"Date"),NA,df<-add_column(df,`Date` = NA)))  
   
+  ifelse(TRUE %in% str_detect(names(df),"Fract. Sec"),df<- select(df,-"Time (Fract. Sec)"),NA)   #Remove fraction of second time column. 
+  ifelse(TRUE %in% str_detect(names(df),"Time"),setnames(df,old=grep("Time", names(df), value = TRUE),new="Time"),ifelse(TRUE %in% str_detect(names(df),"Time"),NA,df<-add_column(df,`Time` = NA)))  
   
   select(df,Event,Site,`Unit ID`,Date,Time,`DO (mg/L)`,`Temp (C°)`,`SpCond (µS/cm)`,pH,`Turbidity (FNU)`,`fDOM (RFU)`,`TAL (RFU)`)
 }
 
-str(Clean_Column_Headers(Bare_082621))
-str(Deployment_Data)
 
-if_else(str_detect(names(Bare_082621),"fDOM RFU"),1,0)
-names(Bare_60921)
 
-ifelse(TRUE %in% str_detect(names(Bare_60921),"fDOM RFU"), setnames(Bare_60921,old=grep("fDOM RFU", names(Bare_60921), value = TRUE),new="fDOM (RFU)"), test<-add_column(Bare_60921,`fDOM (RFU)` = "No Data"))    
 
-str(Bare_082621)
-str(Bare_60921)
-test <- add_column(Bare_082621,add_column ="constant_value")
-ifelse(TRUE %in% str_detect(names(Bare_082621),"DO \\(mg/L\\)"),NA,test<-add_column(Bare_082621,`DO (mg/L)` = "No Data"))
+
+
+
+
+
 
 
 #Import Post-Calibration data and for each parameter check if value is within post-Calibration range for top and bottom standards. If value is within both top and bottom bracket a "pass" is assigned in calibration column  
@@ -237,15 +290,7 @@ Calibrations <- read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/
   rename(`Site Name` = Deployed_Station,Parameter=`Parameter Group`)
 Calibrations$Parameter <- str_replace(Calibrations$Parameter, "FDOM RFU", "fDOM RFU")
 
-#Import Sonde Data
-Event_1 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2015 April to November PFLUX Event 1.xlsx"),Event=1)
-Event_3 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2016 February to April PFLUX Event 3.xlsx"),Event=3)
-Event_4 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2016 June to September PFLUX Event 4.xlsx"),Event=4)
-Event_5 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2016 October to November PFLUX Event 5.xlsx"),Event=5)
-Event_6 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2017 January to February PFLUX Event 6.xlsx"),Event=6)
-Event_7 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2017 May to August PFLUX Event 7.xlsx"),Event=7)
-Event_8 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2017 November to December PFLUX Event 8.xlsx"),Event=8)
-Event_9 <- cbind(read_excel("//ad/DFSroot/data/RSSI/PFlux/Data/EXO_Sonde_Data/QC/2018 June to Spetember PFLUX Event 9.xlsx"),Event=9)
+
 
 #Function to Select relevant parameters
 Parameter_select <-  function(df)
