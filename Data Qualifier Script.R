@@ -178,6 +178,8 @@ mutate(Calibration=case_when(Parameter=="SpCond 2000" & Value %between% SpCond_2
                             .default = as.character("Missing Calibration Data"))) %>%
 mutate(Calibration=ifelse(is.finite(Value) & is.finite(`DO T-Val`) & Parameter=="DO",ifelse(abs(Value-`DO T-Val`)<=0.3,"Passed DO","Failed DO") ,Calibration))        #check if DO is within 0.3 mg/l to True value based on temp
 
+write.csv(Post_Cal_Data,"C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Post_Cal_Data_tidy.csv",row.names=FALSE)  #Save combined data without any qualifiers
+
 
 #checks to see if post-cal was passed for the multiple calibrations points needed to bracket the data
 Post_Cal_Summarized <- Post_Cal_Data %>%
@@ -206,6 +208,7 @@ mutate(`fDOM (RFU)`=case_when(str_detect(`FDOM RFU`,"Passed")~"FDOM Passed Post-
 pivot_longer(names_to = "Parameter",values_to ="Post-Calibration",cols = c("DO (mg/L)", "SpCond (µS/cm)","pH","Turbidity (FNU)", "fDOM (RFU)"))  %>%
 select(Event,Sonde,Parameter,`Post-Calibration`)
 
+write.csv(Post_Cal_Summarized,"C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Post_Cal_Summarized.csv",row.names=FALSE)  #Save combined data without any qualifiers
 
 
 # Step 7.) Joins deployed data to post-cal data ----------------------------------------------------------------
