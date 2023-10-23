@@ -244,7 +244,8 @@ mutate(`Remark Code`=case_when(`Manufacturer Range`=="Value outside sensor range
                                `Parameter` %in% c("fDOM (RFU)","Turbidity (FNU)") ~"H",
                                .default = `Remark Code`)) %>%
 mutate(`Remark Note`=ifelse(`Remark Code` =="H","Method has not been recognized by the FDEP as equivalent to laboratory methods",`Remark Note`)) %>% 
-mutate(`Remark Note`=trimws(ifelse(`Remark Code` %in% c("H","J","?"),paste(`Remark Note`,`Manufacturer Range`,`Post-Calibration`),`Remark Note`))) 
+mutate(`Remark Note`=trimws(ifelse(`Remark Code` %in% c("H","J","?"),paste(`Remark Note`,`Manufacturer Range`,`Post-Calibration`),`Remark Note`))) %>%
+select(-`Post-Calibration`,-`Manufacturer Range`,-Site,-`TAL (RFU)`,-Date,-Time,-`Unit ID`)  
   
                                 
 write.csv(Deployment_Data_Qualified,"C:/Users/citiz/OneDrive - South Florida Water Management District/WQTT/ECOTOPE/Data/Sonde/Ecotope_deployed_sonde_data_qualified.csv",row.names=FALSE)  #Save combined data with qualifiers
